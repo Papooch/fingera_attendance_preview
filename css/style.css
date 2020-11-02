@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+#container {
+    background-color: rgb(231, 231, 231);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.day-of-week {
+    border-right: solid black 2px;
+}
+
+.sum {
+    border-left: solid black 2px;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.day {
+    display: grid;
+    grid-template-columns: 2em 5em auto 7em;
+    position: relative;
+    width: 100%;
+    height: 1.5em;
+    padding: .25em 0em;
+}
+
+.day.weekend {
+    background-color: rgb(197, 197, 197);
+}
+
+.intervals {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.interval {
+    position: absolute;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+}
+
+.interval.work {
+    background-color: orange;
+}
+
+.interval.HO {
+    background-color: yellow;
+}
+
+.interval.lunch {
+    background-color: lightblue;
+}
