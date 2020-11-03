@@ -5,25 +5,36 @@
 #container {
     background-color: rgb(231, 231, 231);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 1024px;
+    margin: auto;
+    padding: 1em;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 15px 4px rgba(0,0,0,0.49); 
+    box-shadow: 0px 3px 15px 4px rgba(0,0,0,0.49);
 }
 
-.day-of-week {
-    border-right: solid black 2px;
+.container-header {
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.day-number {
+    padding-left: 1em;
 }
 
 .sum {
-    border-left: solid black 2px;
     text-align: right;
     padding-right: 1em;
 }
 
 .day {
     display: grid;
-    grid-template-columns: 2em 5em auto 7em;
+    grid-template-columns: 3em 5em auto 8em;
     position: relative;
     width: 100%;
     height: 1.5em;
-    padding: .25em 0em;
+    align-items: center;
 }
 
 .day.weekend {
@@ -32,26 +43,79 @@
 
 .intervals {
     position: relative;
+    display: flex;
+    align-items: center;
     height: 100%;
     width: 100%;
+    border: solid black 1px;
+    border-width: 0 2px 0 2px;
+    border-bottom: solid rgb(180, 180, 180) 1px;
+}
+
+.day:last-child .intervals{
+    border-bottom: none;
+}
+
+.intervals > .hour-number {
+    display: inline-block;
+    height: 100%;
+    flex-basis: 0;
+    flex-grow: 1;
+    overflow: hidden;
+    border-left: solid gray 1px;
+    padding: .2em;
+    /* z-index: 100; */
 }
 
 .interval {
     position: absolute;
-    height: 100%;
+    height: 85%;
     display: inline-block;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-align: center;
+    border-radius: 5px;
+    opacity: .9;
+    z-index: 1;
 }
 
 .interval.work {
-    background-color: orange;
+    background-color: #01ce6e
 }
 
 .interval.HO {
-    background-color: yellow;
+    background-color: #f1c500;
 }
 
 .interval.lunch {
-    background-color: lightblue;
+    background-color: #2774df;
+    height: 86%;
+}
+
+.interval:hover {
+    filter: saturate(50%);
+    z-index: 2;
+}
+
+.interval > .tooltip
+{
+    opacity: 0;
+    position: absolute;
+    color: white;
+    background-color: black;
+    left: calc(50% - 75px);
+    top: 110%;
+    z-index: 100;
+    width: 150px;
+    height: 0px;
+    padding: .5em;
+    border-radius: 5px;
+
+}
+
+.interval:hover > .tooltip {
+    opacity: .7;
+    z-index: 10;
+    height: auto;
+    pointer-events: none;
+    transition: .15s ease-out;
 }

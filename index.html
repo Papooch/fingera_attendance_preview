@@ -14,33 +14,65 @@
     <div id="container">
     </div>
     <script id="app-template" type="text/x-handlebars-template">
-        <div class="day header">
-            <span class="day-number"></span>
-            <span class="day-of-week">day</span>
-            <span class="intervals"></span>
-            <span class="sum">suma</span>
+        <div>
+            <div class="container-header">
+                Docházka za měsíc {{ month }}
+            </div>
+            <div class="day header">
+                <span class="day-number"></span>
+                <span class="day-of-week">day</span>
+                <span class="intervals header">
+                    {{#each intervalHeaders}}
+                        <span class="hour-number">{{hour}}</span>
+                    {{/each}}
+                </span>
+                <span class="sum">suma</span>
+            </div>
+            {{#each days}}
+            <div class="day {{#if (isWeekend dayOfWeek)}}weekend{{/if}}">
+                <span class="day-number">{{day}}.</span>
+                <span class="day-of-week">{{dayOfWeek}}</span>
+                <span class="intervals">
+                    {{#if (hasIntervals)}}
+                        {{#each intervals}}
+                            <span
+                                class="interval {{typeClass}}"
+                                style="left:{{startPercentage}}%;width:{{widthPercentage}}%"
+                            >
+                            <div class="tooltip">
+                                <div>
+                                    {{type}}
+                                </div>
+                                <div>
+                                    {{startText}} - {{endText}}
+                                </div>
+                                <div>
+                                    ({{ durationText }})
+                                </div>
+                            </div>
+                            </span>
+                    {{/each}}
+                    {{else}}
+                        
+                    {{/if}}
+                    {{#each ../intervalHeaders}}
+                        <span class="hour-number"></span>
+                    {{/each}}
+                </span>
+                <span class="sum">{{ hoursMins workMinutes}}</span>
+            </div>
+            {{/each}}
+            <div class="day footer">
+                <span class="day-number"></span>
+                <span class="day-of-week"></span>
+                <span class="intervals footer">
+                    {{#each intervalHeaders}}
+                        <span class="hour-number">{{hour}}</span>
+                    {{/each}}
+                </span>
+                <span class="sum">{{ hoursMins totalMinutes }}</span>
+            </div>
         </div>
-        {{#each days}}
-        <div class="day {{#if (isWeekend dayOfWeek)}}weekend{{/if}}">
-            <span class="day-number">{{day}}.</span>
-            <span class="day-of-week">{{dayOfWeek}}</span>
-            <span class="intervals">
-                {{#if (hasIntervals)}}
-                    {{#each intervals}}
-                        <span
-                            class="interval {{typeClass}}"
-                            style="left:{{startPercentage}}%;width:{{widthPercentage}}%"
-                        >
-                        {{ duration }} {{type}}
-                        </span>
-                {{/each}}
-                {{else}}
-                    
-                {{/if}}
-            </span>
-            <span class="sum">suma</span>
-        </div>
-        {{/each}}
       </script>
 
     <script src="sample/attendance.js"></script>

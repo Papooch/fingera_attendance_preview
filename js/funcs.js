@@ -8,13 +8,20 @@ function getTimePercentage(day, time) {
     return Math.round((time-day.dayStart)/(day.dayEnd-day.dayStart)*1000)/10;
 }
 
+let dayStartHour = "06",
+    dayEndHour = "20",
+    dayStartTime = dayStartHour + ":00",
+    dayEndTime = dayEndHour + ":00";
+
 class Day {
     constructor(match) {
         this.day = match.day;
         this.dayOfWeek = match.dayOfWeek;
         this.intervals = [];
-        this.dayStart = getDateTime(match, "07:00");
-        this.dayEnd = getDateTime(match, "20:00");
+        this.dayStart = getDateTime(match, dayStartTime);
+        this.dayEnd = getDateTime(match, dayEndTime);
+        this.workMinutes = 0;
+        this.monthText = match.month;
         this.addInterval(match);
     }
 
@@ -22,12 +29,15 @@ class Day {
         let interval = {
             type: match.type,
             typeClass: getIntervalType(match.type),
+            startText: match.start,
             start: getDateTime(match, match.start),
+            endText: match.end,
             end: getDateTime(match, match.end),
-            duration: match.duration
+            durationText: match.duration,
         };
         interval.startPercentage = getTimePercentage(this, interval.start)
         interval.widthPercentage = getTimePercentage(this, interval.end) - interval.startPercentage;
+        this.workMinutes += getTotalMinutesFromDuration(match.duration)
         this.intervals.push(interval)
     }
 }
@@ -77,6 +87,32 @@ function getIntervalType(str){
     ];
 }
 
+
+function getTotalMinutesFromDuration(str){
+    let groups = str.match(/(?<negative>-?)(?<hours>[^h]+)h\ ?(?<minutes>[^m]*)(?:min)?/)?.groups;
+    if (!groups) return 0;
+
+    let minutes = (Number.parseInt(groups.hours) * 60
+        + (Number.parseInt(groups.minutes) || 0));
+    if (groups.negative) {
+        minutes *= -1;
+    }
+    return minutes;
+}
+
+function getDurationStringFromMinutes(min){
+    let negative = false;
+    if(min < 0) {
+        min *= -1;
+        negative = true;
+    }
+    let totalHours = Math.floor(min/60);
+    let minutes = min - totalHours * 60;
+    let str = totalHours + "h " + minutes + "min";
+    if (negative) str = "-" + str;
+    return str;
+}
+
 Handlebars.registerHelper('hasIntervals', function () {
     return this.intervals[0].type !== "-";
 })
@@ -91,4 +127,9 @@ Handlebars.registerHelper('readableTime', function (datetime) {
 
 Handlebars.registerHelper('isWeekend', function () {
     return isWeekend(this.dayOfWeek);
+})
+
+Handlebars.registerHelper('hoursMins', function (mins) {
+    if (!mins) return "-";
+    return getDurationStringFromMinutes(mins);
 })
