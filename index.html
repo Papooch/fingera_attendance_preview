@@ -20,13 +20,13 @@
             </div>
             <div class="day header">
                 <span class="day-number"></span>
-                <span class="day-of-week">day</span>
+                <span class="day-of-week">Den</span>
                 <span class="intervals header">
                     {{#each intervalHeaders}}
                         <span class="hour-number">{{hour}}</span>
                     {{/each}}
                 </span>
-                <span class="sum">suma</span>
+                <span class="sum">Práce</span>
             </div>
             {{#each days}}
             <div class="day {{#if (isWeekend dayOfWeek)}}weekend{{/if}}">
@@ -75,7 +75,9 @@
         </div>
       </script>
 
-    <script src="sample/attendance.js"></script>
+    <script src="sample/attendanceCSV.js"></script>
+    <script src="sample/attendanceHTML.js"></script>
+    <script src="js/data_extractor.js"></script>
     <script src="js/funcs.js"></script>
     <script src="js/main.js"></script>
 </body>

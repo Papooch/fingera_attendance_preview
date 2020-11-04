@@ -1,15 +1,7 @@
 'use strict';
 
-let attendanceLines = attendanceTxt.split(/\r?\n/);
-let rgx = /(?<day>^\d\d). (?<month>[^\ ]+) (?<year>[^\ ]+) \[(?<dayOfWeek>[^\]]+)\];(?<type>[^;]+);(?:[^;]+);(?<start>[^;]+);(?:[^;]+);(?<end>[^;\ ]+).*;(?<duration>[^;]+)/
-
-let matches = [];
-for (let line of attendanceLines) {
-    let match = line.match(rgx);
-    if (match) {
-        matches.push(match.groups);
-    }
-}
+let matches = getMatchesFromCSV(attendanceCSV);
+let matches2 = getMatchesFromHTML(attendanceHTML);
 
 let days = [];
 for (let match of matches) {
@@ -20,6 +12,18 @@ for (let match of matches) {
         days[index].addInterval(match);
     }
 }
+
+
+let days2 = [];
+for (let match of matches2) {
+    let index = Number.parseInt(match.day)
+    if (!days2[index]) {
+        days2[index] = new Day(match);
+    } else {
+        days2[index].addInterval(match);
+    }
+}
+
 
 let totalMinutes = 0;
 for (let day of days) {
@@ -34,5 +38,5 @@ for (let h = Number.parseInt(dayStartHour); h < Number.parseInt(dayEndHour); h++
 
 let container = document.getElementById('container');
 var appTemplate = Handlebars.compile(document.getElementById("app-template").innerHTML);
-container.innerHTML = appTemplate({month: days[10].monthText, days, intervalHeaders, totalMinutes});
+container.innerHTML = appTemplate({month: days2[10].monthText, days, intervalHeaders, totalMinutes});
 
