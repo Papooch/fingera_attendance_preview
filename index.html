@@ -14,10 +14,14 @@
 
     <div id="container">
         <div id="file-drop">
-            <span></spand>Přetáhněte exportovaný CSV soubor sem nebo ho <a href="#" id="file-choose">vyberte</a>.</span>
+            <span></spand>Přetáhněte sem exportovaný CSV soubor nebo ho <a href="#" id="file-choose">vyberte</a>.</span>
             <input style="display:none" type="file" id="file-input">
         </div>
     </div>
+
+    <footer>
+        Sleduj tento projekt na <a href="https://github.com/Papooch/fingera_attendance_preview">GitHubu</a>
+    </footer>
     <script id="app-template" type="text/x-handlebars-template">
         <div>
             <div class="container-header">
@@ -76,8 +80,10 @@
                         <span class="hour-number">{{hour}}</span>
                     {{/each}}
                 </span>
-                <span class="sum">{{ hoursMins totalMinutes }}</span>
+                <span class="sum">{{ hoursMins totalMinutes }}*</span>
             </div>
+            <br>
+            *<small>Tento údaj nebude sedět přesně s časem, který ukazuje Fingera, jelikož data, co jsou k dispozici jsou s přesností minut a ne sekund.</small>
         </div>
       </script>
 
