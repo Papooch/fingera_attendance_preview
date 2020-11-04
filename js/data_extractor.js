@@ -12,6 +12,7 @@ function getMatchesFromLines(lines, rgx){
 }
 
 function getMatchesFromCSV(txt){
+
     let attendanceLines = txt.split(/\r?\n/);
     let rgx = /(?<day>^\d\d). (?<month>[^\ ]+) (?<year>[^\ ]+) \[(?<dayOfWeek>[^\]]+)\];(?<type>[^;]+);(?:[^;]+);(?<start>[^;]+);(?:[^;]+);(?<end>[^;\ ]+).*;(?<duration>[^;]+)/
 
