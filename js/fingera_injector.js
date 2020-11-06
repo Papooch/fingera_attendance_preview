@@ -1,5 +1,8 @@
 console.log("working");
 
+var overlay;
+var container;
+
 function isPreviewTableOpen() {
     return !!document.getElementById("preview");
 }
@@ -19,7 +22,7 @@ if (isPreviewTableOpen()) {
 
 
 function createAppContainer(){
-    let overlay = document.createElement("div");
+    overlay = document.createElement("div");
     overlay.style.position = "absolute";
     overlay.style.height = "100%";
     overlay.style.width = "100%";
@@ -27,7 +30,7 @@ function createAppContainer(){
     overlay.style.left = "0";
     document.body.append(overlay);
 
-    let container = document.createElement("div");
+    container = document.createElement("div");
     container.id = "container";
     container.style.position = "relative";
     container.style.top = "-1000px";
@@ -49,4 +52,10 @@ function injectAndDisplayApp(){
     let container = createAppContainer();
     let matches = getMatchesFromHTML(html);
     displayAttendance(matches, container);
+    let closeButton = document.querySelector(".close-button");
+    closeButton.onclick = e=>{
+        e.preventDefault();
+        container.remove();
+        overlay.remove();
+    }
 }

@@ -3,7 +3,7 @@ var appTemplate = Handlebars.compile(`
     <div>
         <div class="container-header">
             Docházka za měsíc {{ month }}
-            <a href="./own_web_overview" class="close-button">X</a>
+            <a href="." class="close-button">X</a>
         </div>
         <div class="day day-header">
             <span class="day-number"></span>
