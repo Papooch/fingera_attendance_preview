@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <title>Fingera attendance preview</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
-        integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -22,73 +19,8 @@
     <footer>
         Sleduj tento projekt na <a href="https://github.com/Papooch/fingera_attendance_preview">GitHubu</a>
     </footer>
-    <script id="app-template" type="text/x-handlebars-template">
-        <div>
-            <div class="container-header">
-                Docházka za měsíc {{ month }}
-                <a href="." class="close-button">X</a>
-            </div>
-            <div class="day header">
-                <span class="day-number"></span>
-                <span class="day-of-week">Den</span>
-                <span class="intervals header">
-                    {{#each intervalHeaders}}
-                        <span class="hour-number">{{hour}}</span>
-                    {{/each}}
-                </span>
-                <span class="sum">Práce</span>
-            </div>
-            {{#each days}}
-            <div class="day {{#if (isWeekend dayOfWeek)}}weekend{{/if}}">
-                <span class="day-number">{{day}}.</span>
-                <span class="day-of-week">{{dayOfWeek}}</span>
-                <span class="intervals">
-                    {{#if (hasIntervals)}}
-                        {{#each intervals}}
-                            <span
-                                class="interval {{typeClass}}"
-                                style="left:{{startPercentage}}%;width:{{widthPercentage}}%"
-                            >
-                            <div class="tooltip">
-                                <div>
-                                    {{type}}
-                                </div>
-                                <div>
-                                    {{startText}} - {{endText}}
-                                </div>
-                                <div>
-                                    ({{ durationText }})
-                                </div>
-                            </div>
-                            </span>
-                    {{/each}}
-                    {{else}}
-                        
-                    {{/if}}
-                    {{#each ../intervalHeaders}}
-                        <span class="hour-number"></span>
-                    {{/each}}
-                </span>
-                <span class="sum">{{ hoursMins workMinutes}}</span>
-            </div>
-            {{/each}}
-            <div class="day footer">
-                <span class="day-number"></span>
-                <span class="day-of-week"></span>
-                <span class="intervals footer">
-                    {{#each intervalHeaders}}
-                        <span class="hour-number">{{hour}}</span>
-                    {{/each}}
-                </span>
-                <span class="sum">{{ hoursMins totalMinutes }}*</span>
-            </div>
-            <br>
-            *<small>Tento údaj nebude sedět přesně s časem, který ukazuje Fingera, jelikož data, co jsou k dispozici jsou s přesností minut a ne sekund.</small>
-        </div>
-      </script>
-
-    <script src="sample/attendanceCSV.js"></script>
-    <script src="sample/attendanceHTML.js"></script>
+    <script src="libs/handlebars.min-v4.7.6.js"></script>
+    <script src="js/template.js"></script>
     <script src="js/data_extractor.js"></script>
     <script src="js/funcs.js"></script>
     <script src="js/main.js"></script>

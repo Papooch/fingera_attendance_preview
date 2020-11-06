@@ -132,7 +132,7 @@ footer {
     z-index: 2;
 }
 
-.interval > .tooltip
+.interval > .interval-tooltip
 {
     opacity: 0;
     position: absolute;
@@ -148,7 +148,7 @@ footer {
 
 }
 
-.interval:hover > .tooltip {
+.interval:hover > .interval-tooltip {
     opacity: .7;
     z-index: 10;
     height: auto;
