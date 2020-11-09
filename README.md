@@ -24,8 +24,6 @@ Projekt funguje jako webová stránka ([Funkční verze k dispozici zde](https:/
   *TODO #1: návod na instalaci v jednotlivých prohlížečích*,  
   *TODO #2: publikovat rozšíření na distribuční platformy jednotlivých prohlížečů*
 
-### Další postup:
-* Zobrazení právě probíhající činnosti
 
 ### Známé problémy:
  * Celkový odpracovaný čas za měsíc nesedí přesně s časem, který ukazuje Fingera, protože přehled obsahuje pouze časy zaokrouhlené na celé minuty, přičemž samotná Fingera pracuje i se sekundami.
