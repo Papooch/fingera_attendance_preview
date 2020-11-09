@@ -9,7 +9,7 @@ function getTimePercentage(day, time) {
 }
 
 let dayStartHour = "06",
-    dayEndHour = "20",
+    dayEndHour = "21",
     dayStartTime = dayStartHour + ":00",
     dayEndTime = dayEndHour + ":00";
 
@@ -35,9 +35,21 @@ class Day {
             end: getDateTime(match, match.end),
             durationText: match.duration,
         };
+        if (
+            Number.isNaN(interval.end.getTime()) &&
+            !Number.isNaN(interval.start.getTime())
+        ){
+            interval.type += " (probíhá)";
+            interval.typeClass += " ongoing";
+            let now = new Date() ;
+            now.setTime( now.getTime() - new Date().getTimezoneOffset()*60*1000 );
+            interval.end = now;
+            interval.endText = interval.end.toISOString().substr(11,5);
+            interval.durationText = getDurationStringFromMinutes(Math.floor((interval.end - interval.start)/60000));
+        }
         interval.startPercentage = getTimePercentage(this, interval.start)
         interval.widthPercentage = getTimePercentage(this, interval.end) - interval.startPercentage;
-        this.workMinutes += getTotalMinutesFromDuration(match.duration)
+        this.workMinutes += getTotalMinutesFromDuration(interval.durationText)
         this.intervals.push(interval)
     }
 }
@@ -82,7 +94,7 @@ function getIntervalType(str){
     return intervalLookup[
         str
             .replace("*", "")
-            .replace("(automatický)", "")
+            .replace(/\(.*\)/, "")
             .trim(" ")
     ];
 }

@@ -32,7 +32,6 @@ function readAndDisplayCSV(csv){
     let reader = new FileReader();
     reader.onload = function (e) {
         displayAttendance(getMatchesFromCSV(this.result), container);
-        console.log(this.result);
     }
     reader.readAsText(csv, "windows-1250");
 }

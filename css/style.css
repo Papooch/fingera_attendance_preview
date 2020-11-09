@@ -132,6 +132,14 @@ footer {
     z-index: 2;
 }
 
+.interval.ongoing {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 3px;
+    border-right-color: gray;
+    border-right-style: solid;
+}
+
 .interval > .interval-tooltip
 {
     opacity: 0;
