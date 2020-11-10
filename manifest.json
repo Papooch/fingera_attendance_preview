@@ -6,7 +6,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://*.fingera.com/client/own_web_overview"
+                "*://*.fingera.com/client/own_web_overview"
             ],
             "css": [
                 "css/style.css"
