@@ -28,7 +28,7 @@ Projekt funguje jako webová stránka ([Funkční verze k dispozici zde](https:/
 ### Známé problémy:
  * Celkový odpracovaný čas za měsíc nesedí přesně s časem, který ukazuje Fingera, protože přehled obsahuje pouze časy zaokrouhlené na celé minuty, přičemž samotná Fingera pracuje i se sekundami.
 
- * Diagram graficky podporuje pouze záznamy "Práce", "Oběd" a "Home Office", ostatní se zobrazí růžově, ale čas práce by se měl ve většině případů, kromě "návštěva u lékaře" počítat správně.
+ * Diagram graficky podporuje pouze záznamy "Práce", "Oběd", "Home Office" a "Návštěva lékaře" ,ostatní se zobrazí růžově, a čas se počítá jako čas práce.
 
 
 Screenshot:

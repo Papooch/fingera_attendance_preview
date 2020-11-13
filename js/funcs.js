@@ -19,7 +19,7 @@ function getDateTime(match, time) {
  * @param {Date} time 
  */
 function getTimePercentage(day, time) {
-    return Math.round((time-day.dayStart)/(day.dayEnd-day.dayStart)*1000)/10;
+    return Math.round((time-day.dayStart)/(day.dayEnd-day.dayStart)*100)/1;
 }
 
 let dayStartHour = "06",
@@ -40,9 +40,12 @@ class Day {
     }
 
     addInterval(match) {
+        let intervalInfo = getIntervalType(match.type);
+        console.log(intervalInfo);
         let interval = {
             type: match.type,
-            typeClass: getIntervalType(match.type),
+            typeClass: intervalInfo?.class,
+            isWork: intervalInfo?.work,
             startText: match.start,
             start: getDateTime(match, match.start),
             endText: match.end,
@@ -65,7 +68,9 @@ class Day {
         }
         interval.startPercentage = getTimePercentage(this, interval.start)
         interval.widthPercentage = getTimePercentage(this, interval.end) - interval.startPercentage;
-        this.workMinutes += getTotalMinutesFromDuration(interval.durationText)
+        if(interval.isWork){
+            this.workMinutes += getTotalMinutesFromDuration(interval.durationText)
+        }
         this.intervals.push(interval)
     }
 }
@@ -108,9 +113,10 @@ function isWeekend(str){
 
 function getIntervalType(str){
     let intervalLookup = {
-        "Oběd": "lunch",
-        "Práce": "work",
-        "Home Office": "HO",
+        "Práce": {class: "work", work: true},
+        "Oběd": {class: "lunch", work: true},
+        "Home Office": {class: "HO", work: true},
+        "Návštěva lékaře": {class: "doctor", work: false},
     }
     return intervalLookup[
         str
