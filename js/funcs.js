@@ -1,9 +1,23 @@
 'use strict';
 
+/**
+ * Converts a time string to a proper Date object
+ * 
+ * @param {RegExpMatchArray} match 
+ * @param {String} time time in the format of "HH:mm"
+ * @return {Date}
+ */
 function getDateTime(match, time) {
     return new Date(`${match.year}-${getMonthNumStr(match.month)}-${match.day}T${time}Z`);
 }
 
+/**
+ * Returns a percentage of the time passed from 
+ * the start of the day to the end of the day
+ * 
+ * @param {Object} day 
+ * @param {Date} time 
+ */
 function getTimePercentage(day, time) {
     return Math.round((time-day.dayStart)/(day.dayEnd-day.dayStart)*1000)/10;
 }
@@ -54,6 +68,11 @@ class Day {
     }
 }
 
+/**
+ * 
+ * @param {String} str 
+ * @return {String}
+ */
 function getMonthNumStr(str) {
     let monthsLokup = {
         "Leden": "01",
